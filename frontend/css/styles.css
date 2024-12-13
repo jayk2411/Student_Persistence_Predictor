@@ -98,3 +98,88 @@ th {
     background-color: #f8f9fa;
     font-weight: 600;
 }
+
+/* Add these to your existing styles.css */
+
+.loader {
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #1a73e8;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+.history-loader {
+    margin: 20px auto;
+    width: 40px;
+    height: 40px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#serverStatus {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+#serverStatus.online {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+#serverStatus.offline {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 44px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.button-text {
+    margin-right: 8px;
+}
+
+.history {
+    position: relative;
+}
+
+.history-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#historyTable {
+    min-height: 100px;
+}
+
+#serverError {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* .history {
+    display: none;
+} */
