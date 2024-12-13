@@ -9,6 +9,7 @@ class NeuralNetwork:
     def __init__(self):
         self.model = None
         self.scaler = None
+        self.history = None
         
     def build_model(self):
         """Build the neural network architecture"""
@@ -30,9 +31,9 @@ class NeuralNetwork:
         # Build the model if it doesn't exist
         if self.model is None:
             self.build_model()
-            
-        # Train the model
-        history = self.model.fit(
+        
+         # Train the model and store history
+        self.history = self.model.fit(
             X_train, y_train,
             epochs=50,
             batch_size=32,
@@ -40,8 +41,8 @@ class NeuralNetwork:
             verbose=1
         )
         
-        # Return training accuracy
-        return history.history['accuracy'][-1]
+        # Return the history object
+        return self.history
     
     def predict(self, input_data):
         """Make predictions using the trained model"""

@@ -7,6 +7,9 @@ from datetime import datetime
 import logging
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix, classification_report
 
 def setup_logging():
     """Set up logging configuration"""
@@ -163,6 +166,55 @@ def verify_model_files():
     
     return True
 
+def plot_training_metrics(history):
+    """Plot training and validation metrics"""
+    # Create figure with subplots
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
+    
+    # Plot accuracy
+    ax1.plot(history.history['accuracy'], label='Training Accuracy')
+    ax1.plot(history.history['val_accuracy'], label='Validation Accuracy')
+    ax1.set_title('Model Accuracy')
+    ax1.set_xlabel('Epoch')
+    ax1.set_ylabel('Accuracy')
+    ax1.legend()
+    ax1.grid(True)
+    
+    # Plot loss
+    ax2.plot(history.history['loss'], label='Training Loss')
+    ax2.plot(history.history['val_loss'], label='Validation Loss')
+    ax2.set_title('Model Loss')
+    ax2.set_xlabel('Epoch')
+    ax2.set_ylabel('Loss')
+    ax2.legend()
+    ax2.grid(True)
+    
+    plt.tight_layout()
+    plt.savefig('F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/visualizations/training_metrics.png')
+    plt.close()
+
+def plot_confusion_matrix(y_true, y_pred):
+    """Plot confusion matrix"""
+    cm = confusion_matrix(y_true, y_pred)
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+    plt.title('Confusion Matrix')
+    plt.ylabel('True Label')
+    plt.xlabel('Predicted Label')
+    plt.savefig('F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/visualizations/confusion_matrix.png')
+    plt.close()
+
+def plot_feature_importance(X_train, feature_names):
+    """Plot feature importance"""
+    plt.figure(figsize=(10, 6))
+    importance = np.abs(np.corrcoef(X_train.T)[0, 1:])
+    plt.bar(feature_names[1:], importance)
+    plt.title('Feature Importance')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/visualizations/feature_importance.png')
+    plt.close()
+
 def train():
     """Main training function."""
     try:
@@ -182,17 +234,35 @@ def train():
         nn = NeuralNetwork()
         
         # Train the model
-        train_score = nn.train(X_train, y_train)
+        training_history = nn.train(X_train, y_train)  # Store the returned history
         
-        # Evaluate the model
+        # Create visualizations directory if it doesn't exist
+        os.makedirs('F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/visualizations', exist_ok=True)
+
+        
+        # Get predictions
+        y_pred = (nn.model.predict(X_test) > 0.5).astype(int)
+        
+        # Calculate and log metrics, Evaluate the model
         test_loss, test_accuracy = nn.evaluate(X_test, y_test)
+        logging.info(f"\nTest accuracy: {test_accuracy:.4f}")
+        logging.info(f"Test loss: {test_loss:.4f}")
+        
+        # Generate classification report
+        report = classification_report(y_test, y_pred)
+        logging.info(f"\nClassification Report:\n{report}")
+        
+        # Create visualizations using the training history
+        plot_training_metrics(training_history)
+        plot_confusion_matrix(y_test, y_pred)
+        
+        # Plot feature importance
+        feature_names = ['First Term GPA', 'Second Term GPA', 
+                        'High School Average', 'Math Score']
+        plot_feature_importance(X_train, np.array(feature_names))
         
         # Set the scaler
         nn.set_scaler(scaler)
-        
-        logging.info(f"Training accuracy: {train_score:.4f}")
-        logging.info(f"Test accuracy: {test_accuracy:.4f}")
-        logging.info(f"Test loss: {test_loss:.4f}")
         
         # Save model and scaler
         nn.save_model(
