@@ -13,11 +13,11 @@ from sklearn.metrics import confusion_matrix, classification_report
 
 def setup_logging():
     """Set up logging configuration"""
-    if not os.path.exists('../logs'):
-        os.makedirs('../logs')
+    if not os.path.exists('F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/logs'):
+        os.makedirs('F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/logs')
     
     # Set up logging configuration
-    log_filename = f'../logs/training_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
+    log_filename = f'F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/logs/training_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(message)s',

@@ -73,7 +73,7 @@ class NeuralNetwork:
         except Exception as e:
             raise Exception(f"Prediction error: {str(e)}")
     
-    def save_model(self, model_path='../models/persistence_model.h5', scaler_path='../models/scaler.pkl'):
+    def save_model(self, model_path='F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/models/persistence_model.h5', scaler_path='F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/models/scaler.pkl'):
         """Save the trained model and scaler"""
         try:
             # Create models directory if it doesn't exist
@@ -86,7 +86,7 @@ class NeuralNetwork:
         except Exception as e:
             raise Exception(f"Error saving model: {str(e)}")
     
-    def load_model(self, model_path='../models/persistence_model.h5', scaler_path='../models/scaler.pkl'):
+    def load_model(self, model_path='F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/models/persistence_model.h5', scaler_path='F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/models/scaler.pkl'):
         """Load the trained model and scaler"""
         try:
             self.model = keras.models.load_model(model_path)
