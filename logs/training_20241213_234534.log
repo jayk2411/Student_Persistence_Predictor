@@ -1,0 +1,72 @@
+2024-12-13 23:45:34,348 - INFO - Starting model training...
+2024-12-13 23:45:34,350 - INFO - Loading data from: F:/STUDY/Sem-3/neural network/Project/StudentPersistencePredictor/data/Student_data.csv
+2024-12-13 23:45:34,466 - INFO - Data shape after cleaning: (1437, 15)
+2024-12-13 23:45:34,468 - INFO - 
+Missing values after cleaning:
+2024-12-13 23:45:34,473 - INFO - First Term Gpa              0
+Second Term Gpa             0
+First Language              0
+Funding                     0
+School                      0
+FastTrack                   0
+Coop                        0
+Residency                   0
+Gender                      0
+Previous Education          0
+Age Group                   0
+High School Average Mark    0
+Math Score                  0
+English Grade               0
+FirstYearPersistence        0
+dtype: int64
+2024-12-13 23:45:34,478 - INFO - 
+Data statistics:
+2024-12-13 23:45:34,577 - INFO -        First Term Gpa  Second Term Gpa  First Language      Funding  ...  High School Average Mark   Math Score  English Grade  FirstYearPersistence
+count     1437.000000      1437.000000     1437.000000  1437.000000  ...               1437.000000  1437.000000    1437.000000           1437.000000
+mean         2.849108         2.843291        1.840640     2.926931  ...                 77.332289    32.378566       8.029228              0.791928
+std          1.168451         1.065903        0.986153     1.257658  ...                  8.388590     8.823875       1.689055              0.406070
+min          0.000000         0.000000        1.000000     1.000000  ...                 17.000000     6.000000       1.000000              0.000000
+25%          2.250000         2.388889        1.000000     2.000000  ...                 77.500000    27.000000       7.000000              1.000000
+50%          3.102632         3.027778        1.000000     2.000000  ...                 77.500000    32.000000       8.000000              1.000000
+75%          3.738095         3.590909        3.000000     4.000000  ...                 77.500000    38.000000       9.000000              1.000000
+max          4.500000         4.500000        3.000000     9.000000  ...                108.000000    50.000000      10.000000              1.000000
+
+[8 rows x 15 columns]
+2024-12-13 23:45:36,181 - WARNING - From C:\Users\ALMIGHTY\AppData\Roaming\Python\Python311\site-packages\keras\src\backend.py:873: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+2024-12-13 23:45:37,322 - WARNING - From C:\Users\ALMIGHTY\AppData\Roaming\Python\Python311\site-packages\keras\src\optimizers\__init__.py:309: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+2024-12-13 23:45:38,757 - WARNING - From C:\Users\ALMIGHTY\AppData\Roaming\Python\Python311\site-packages\keras\src\utils\tf_utils.py:492: The name tf.ragged.RaggedTensorValue is deprecated. Please use tf.compat.v1.ragged.RaggedTensorValue instead.
+
+2024-12-13 23:45:40,284 - WARNING - From C:\Users\ALMIGHTY\AppData\Roaming\Python\Python311\site-packages\keras\src\engine\base_layer_utils.py:384: The name tf.executing_eagerly_outside_functions is deprecated. Please use tf.compat.v1.executing_eagerly_outside_functions instead.
+
+2024-12-13 23:46:16,918 - INFO - 
+Test accuracy: 0.8576
+2024-12-13 23:46:16,919 - INFO - Test loss: 0.3761
+2024-12-13 23:46:16,995 - INFO - 
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.43      0.59        69
+           1       0.85      0.99      0.91       219
+
+    accuracy                           0.86       288
+   macro avg       0.89      0.71      0.75       288
+weighted avg       0.87      0.86      0.84       288
+
+2024-12-13 23:46:21,944 - INFO - Model and scaler saved successfully!
+2024-12-13 23:46:21,945 - INFO - 
+Testing model with sample cases...
+2024-12-13 23:46:22,574 - INFO - 
+Test Case 1:
+2024-12-13 23:46:22,575 - INFO - Input: {'first_term_gpa': 3.5, 'second_term_gpa': 3.2, 'high_school_average': 85, 'math_score': 40}
+2024-12-13 23:46:22,576 - INFO - Prediction: 91.67% probability of persistence
+2024-12-13 23:46:22,578 - INFO - Expected Range: high
+2024-12-13 23:46:22,951 - INFO - 
+Test Case 2:
+2024-12-13 23:46:22,951 - INFO - Input: {'first_term_gpa': 1.5, 'second_term_gpa': 1.2, 'high_school_average': 60, 'math_score': 20}
+2024-12-13 23:46:22,953 - INFO - Prediction: 45.11% probability of persistence
+2024-12-13 23:46:22,954 - INFO - Expected Range: low
+2024-12-13 23:46:22,956 - INFO - Found persistence_model.h5 (Size: 32.23 KB)
+2024-12-13 23:46:22,957 - INFO - Found scaler.pkl (Size: 1.07 KB)
+2024-12-13 23:46:22,959 - INFO - Model training and verification completed successfully!
