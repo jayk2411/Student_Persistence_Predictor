@@ -36,6 +36,12 @@ async function predictPersistence() {
         }
 
         const result = await response.json();
+
+        // Clear all input fields after successful prediction
+        document.getElementById('firstTermGpa').value = '';
+        document.getElementById('secondTermGpa').value = '';
+        document.getElementById('highSchoolAverage').value = '';
+        document.getElementById('mathScore').value = '';
         
         document.getElementById('result').style.display = 'block';
         document.getElementById('predictionText').innerText = 
